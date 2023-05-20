@@ -1,4 +1,4 @@
-package com.Theowns.MechanicalAsisstant.models;
+package com.Theowns.Models;
 
 
 import jakarta.persistence.*;
