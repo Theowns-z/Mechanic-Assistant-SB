@@ -2,8 +2,7 @@ package com.Theowns.Models;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
 @Data
@@ -14,16 +13,16 @@ public class ServicioModel {
     @Column(unique = true, nullable = false)
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    @Column
-    @Getter @Setter
-    private String nombreconductor;
+
+    @ManyToOne
+    @JoinColumn(name = "conductor_id", nullable = false)
+    private ConductorModel conductor;
+
+    @ManyToOne
+    @JoinColumn(name = "mecanico_id", nullable = false)
+    private MecanicoModel mecanico;
 
     @Column
-    @Getter @Setter
-    private String nombremecanico;
-
-    @Column
-    @Getter @Setter
     private String fecha;
 
 

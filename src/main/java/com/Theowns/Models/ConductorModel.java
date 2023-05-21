@@ -5,34 +5,19 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.Set;
+
 @Entity
 @Data
 @Table(name="conductores")
-public class ConductorModel {
+public class ConductorModel extends PersonaModel {
 
-    @Id
-    @Column(unique = true, nullable = false)
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
-    @Column
-    @Getter @Setter
-    private String nombre;
-    @Column
-    @Getter @Setter
-    private String apellido;
-    @Column(unique = true, nullable = false )
-    @Getter @Setter
-    private long cedula;
-    @Column
-    @Getter @Setter
-    private int edad;
-    @Column
-    @Getter @Setter
-    private String telefono;
-    @Column
-    @Getter @Setter
-    private String direccion;
+    @OneToMany(mappedBy="conductor")
+    private ArrayList<VehiculoModel> vehiculos;
 
+    @OneToMany(mappedBy="conductor")
+    private ArrayList<ServicioModel> servicios;
 
 }
 

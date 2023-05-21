@@ -15,13 +15,13 @@ public class VehiculoModel {
     private  long id;
 
     @Column(unique = true, nullable = false )
-    @Getter @Setter
     private String placa;
     @Column
-    @Getter @Setter
     private String modelo;
     @Column
-    @Getter @Setter
     private String falla;
 
+    @ManyToOne
+    @JoinColumn(name = "conductor_id", nullable = false)
+    private ConductorModel conductor;
 }

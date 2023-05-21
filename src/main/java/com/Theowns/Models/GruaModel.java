@@ -8,21 +8,9 @@ import lombok.Setter;
 @Entity
 @Data
 @Table(name = "gruas")
-public class GruaModel {
+public class GruaModel extends EmpresaModel {
 
-    @Id
-    @Column(unique = true, nullable = false)
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
     @Column
-    @Getter @Setter
-    private String nombreempresa;
-    @Column
-    @Getter @Setter
-    private String telefono;
-    @Column
-    @Getter @Setter
-    private String direccion;
-
+    private String tipo;
 
 }
