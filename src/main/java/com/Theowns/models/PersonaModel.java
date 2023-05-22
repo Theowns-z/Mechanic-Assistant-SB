@@ -1,13 +1,13 @@
-package com.Theowns.Models;
+package com.Theowns.models;
 
 import jakarta.persistence.*;
 import lombok.Data;
 
-@Entity
 @Data
+@Entity
+@Table(name = "personas")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-@Table(name = "empresas")
-public class EmpresaModel {
+public class PersonaModel {
 
     @Id
     @Column(unique = true, nullable = false)
@@ -16,12 +16,12 @@ public class EmpresaModel {
     @Column
     private String nombre;
     @Column
+    private String apellido;
+    @Column(unique = true, nullable = false )
+    private long cedula;
+    @Column
     private String telefono;
     @Column
     private String direccion;
-    @Column
-    private double coordenada_x;
-    @Column
-    private double coordenada_y;
 
 }

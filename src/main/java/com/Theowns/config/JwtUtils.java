@@ -37,14 +37,14 @@ public class JwtUtils {
     }
 
     private Claims extractAllClaims(String token){
-        return Jwts.parser().setSigningKey(jwtSigningKey).parseClaimsJwt(token).getBody();
+        return Jwts.parser().setSigningKey(jwtSigningKey).parseClaimsJws(token).getBody();
     }
 
     private Boolean isTokenExpired(String token){
         return extractExpiration(token).before(new Date());
     }
 
-    private String generateToken(UserDetails userDetails){
+    public String generateToken(UserDetails userDetails){
         Map<String,Object> claims = new HashMap<>();
         return createToken(claims,userDetails);
     }

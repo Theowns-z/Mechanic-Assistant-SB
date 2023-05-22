@@ -1,9 +1,7 @@
-package com.Theowns.Models;
+package com.Theowns.models;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 @Entity
 @Data
