@@ -1,6 +1,6 @@
 package com.Theowns.config;
 
-import com.Theowns.Repositories.UserRepository;
+import com.Theowns.repositories.UserRepository;
 import com.Theowns.models.UserModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

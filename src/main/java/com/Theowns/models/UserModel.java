@@ -6,6 +6,11 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+enum UserRole {
+    CONDUCTOR,
+    MECANICO
+}
+
 @Entity
 @Data
 @NoArgsConstructor
@@ -22,5 +27,11 @@ public class UserModel {
     private String email;
     @Column(nullable = false)
     private String password;
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private PersonaModel persona;
+    @Column(nullable = true)
+    @Enumerated(EnumType.STRING)
+    private UserRole role;
+
 
 }

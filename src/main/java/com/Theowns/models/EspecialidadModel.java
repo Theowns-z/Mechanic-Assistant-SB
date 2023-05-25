@@ -22,5 +22,6 @@ public class EspecialidadModel {
     private MecanicoModel mecanico;
 
     @Column
+    @Enumerated(EnumType.STRING)
     private Especialidades tipo;
 }

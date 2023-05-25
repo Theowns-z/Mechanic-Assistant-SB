@@ -1,4 +1,4 @@
-package com.Theowns.Repositories;
+package com.Theowns.repositories;
 
 import com.Theowns.models.UserModel;
 import org.springframework.data.jpa.repository.JpaRepository;
