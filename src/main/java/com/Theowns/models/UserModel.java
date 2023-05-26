@@ -1,6 +1,7 @@
 package com.Theowns.models;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,17 +22,15 @@ public class UserModel {
     @Column(unique = true, nullable = false)
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    @Column
-    private String name;
     @Column(unique = true, nullable = false)
     private String email;
     @Column(nullable = false)
     private String password;
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private PersonaModel persona;
     @Column(nullable = true)
-    @Enumerated(EnumType.STRING)
-    private UserRole role;
+    private String role;
 
 
 }

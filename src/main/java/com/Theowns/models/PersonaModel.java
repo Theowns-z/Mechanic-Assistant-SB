@@ -26,7 +26,6 @@ public class PersonaModel {
     private String direccion;
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
-    @JsonIgnore
     private UserModel user;
 
 }

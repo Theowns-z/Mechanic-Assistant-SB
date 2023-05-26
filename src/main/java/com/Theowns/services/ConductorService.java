@@ -1,19 +1,22 @@
 package com.Theowns.services;
 
 import com.Theowns.models.ConductorModel;
+import com.Theowns.models.UserModel;
 import com.Theowns.repositories.ConductorRepository;
+import com.Theowns.repositories.UserRepository;
 import com.Theowns.services.exceptions.ExceptionObjectNotFound;
 import com.Theowns.services.interfaces.InterfaceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class ConductorService implements InterfaceService<ConductorModel> {
     @Autowired
     ConductorRepository conductorRepository;
+    @Autowired
+    UserService userService;
 
     @Override
     public List<ConductorModel> getAll() {
@@ -27,7 +30,12 @@ public class ConductorService implements InterfaceService<ConductorModel> {
 
     @Override
     public ConductorModel save(ConductorModel conductor) {
-        return conductorRepository.save(conductor);
+        if(!conductorRepository.existsByCedula(conductor.getCedula())){
+            UserModel user = conductor.getUser();
+            userService.save(user);
+            return conductorRepository.save(conductor);
+        }
+        return null;
     }
 
     @Override

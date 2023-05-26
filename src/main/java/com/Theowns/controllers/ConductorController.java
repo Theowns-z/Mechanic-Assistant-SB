@@ -2,6 +2,7 @@ package com.Theowns.controllers;
 
 import com.Theowns.models.ConductorModel;
 import com.Theowns.services.ConductorService;
+import com.Theowns.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +15,8 @@ import java.util.List;
 public class ConductorController {
     @Autowired
     ConductorService conductorService;
+
+
     @GetMapping
     public List<ConductorModel> getAll(){
         return (conductorService.getAll());
@@ -28,11 +31,11 @@ public class ConductorController {
 
     @PostMapping()
     public ResponseEntity<ConductorModel> save(@RequestBody ConductorModel conductor){
-        return ResponseEntity.ok(conductorService.save(conductor));
+        return ResponseEntity.ok( conductorService.save(conductor));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ConductorModel> save(@RequestBody ConductorModel conductor, @PathVariable("id") Long id){
+    public ResponseEntity<ConductorModel> update(@RequestBody ConductorModel conductor, @PathVariable("id") Long id){
         return ResponseEntity.ok(conductorService.update(id,conductor));
     }
 
