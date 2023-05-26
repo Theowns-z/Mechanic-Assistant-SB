@@ -3,33 +3,28 @@ package com.Theowns.services;
 import com.Theowns.models.TallerModel;
 import com.Theowns.repositories.TallerRepository;
 import com.Theowns.services.exceptions.ExceptionObjectNotFound;
-import com.Theowns.services.interfaces.InterfaceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class TallerService implements InterfaceService<TallerModel> {
+public class TallerService {
     @Autowired
     TallerRepository tallerRepository;
 
-    @Override
     public List<TallerModel> getAll() {
         return (List<TallerModel>) tallerRepository.findAll();
     }
 
-    @Override
     public TallerModel getOne(Long id) throws ExceptionObjectNotFound {
         return tallerRepository.findById(id).orElseThrow(()->new ExceptionObjectNotFound("Taller no encontrado"));
     }
 
-    @Override
     public TallerModel save(TallerModel taller) {
         return tallerRepository.save(taller);
     }
 
-    @Override
     public TallerModel update(Long id,TallerModel tallerNuevo) throws ExceptionObjectNotFound {
         TallerModel taller = tallerRepository
                 .findById(id)
@@ -45,7 +40,6 @@ public class TallerService implements InterfaceService<TallerModel> {
 
     }
 
-    @Override
     public String delete(Long id) throws ExceptionObjectNotFound {
         TallerModel taller = tallerRepository
                 .findById(id)

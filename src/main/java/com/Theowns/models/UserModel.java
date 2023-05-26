@@ -1,16 +1,13 @@
 package com.Theowns.models;
 
 
+import com.Theowns.models.enums.UserRole;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-enum UserRole {
-    CONDUCTOR,
-    MECANICO
-}
 
 @Entity
 @Data
@@ -30,7 +27,8 @@ public class UserModel {
     @JsonIgnore
     private PersonaModel persona;
     @Column(nullable = true)
-    private String role;
+    @Enumerated(EnumType.STRING)
+    private UserRole role;
 
 
 }

@@ -1,15 +1,12 @@
 package com.Theowns.models;
 
+import com.Theowns.models.enums.Especialidades;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-enum Especialidades{
-    Electricidad,
-    Reparaciones,
-    Automotriz
-}
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

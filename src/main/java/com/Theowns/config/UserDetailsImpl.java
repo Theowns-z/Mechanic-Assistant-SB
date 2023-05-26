@@ -48,6 +48,6 @@ public class UserDetailsImpl implements UserDetails {
     }
 
     public String getRole(){
-        return userModel.getRole();
+        return userModel.getRole().name();
     }
 }

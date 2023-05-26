@@ -3,33 +3,28 @@ package com.Theowns.services;
 import com.Theowns.models.GruaModel;
 import com.Theowns.repositories.GruaRepository;
 import com.Theowns.services.exceptions.ExceptionObjectNotFound;
-import com.Theowns.services.interfaces.InterfaceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class GruaService implements InterfaceService<GruaModel> {
+public class GruaService  {
     @Autowired
     GruaRepository gruaRepository;
 
-    @Override
     public List<GruaModel> getAll() {
         return (List<GruaModel>) gruaRepository.findAll();
     }
 
-    @Override
     public GruaModel getOne(Long id) throws ExceptionObjectNotFound {
         return gruaRepository.findById(id).orElseThrow(()->new ExceptionObjectNotFound("Grua no encontrado"));
     }
 
-    @Override
     public GruaModel save(GruaModel grua) {
         return gruaRepository.save(grua);
     }
 
-    @Override
     public GruaModel update(Long id,GruaModel gruaNuevo) throws ExceptionObjectNotFound {
         GruaModel grua = gruaRepository
                 .findById(id)
@@ -46,7 +41,6 @@ public class GruaService implements InterfaceService<GruaModel> {
 
     }
 
-    @Override
     public String delete(Long id) throws ExceptionObjectNotFound {
         GruaModel grua = gruaRepository
                 .findById(id)
