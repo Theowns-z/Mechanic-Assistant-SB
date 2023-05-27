@@ -13,14 +13,12 @@ public class VehiculoModel {
     @Column(unique = true, nullable = false )
     @Getter @Setter
     private  long id;
-
     @Column(unique = true, nullable = false )
     private String placa;
     @Column
     private String modelo;
     @Column
     private String falla;
-
     @ManyToOne
     @JoinColumn(name = "conductor_id", nullable = false)
     private ConductorModel conductor;

@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 @Data
@@ -14,13 +15,13 @@ import java.util.ArrayList;
 public class MecanicoModel extends PersonaModel {
 
     @OneToMany(mappedBy="mecanico")
-    private ArrayList<EspecialidadModel> especialidades;
+    private List<EspecialidadModel> especialidades;
 
     @OneToMany(mappedBy="mecanico")
-    private ArrayList<ServicioModel> servicio;
+    private List<ServicioModel> servicio;
 
     @OneToMany(mappedBy="mecanico")
-    private ArrayList<CalificacionModel> calificacion;
+    private List<CalificacionModel> calificacion;
 
 }
 

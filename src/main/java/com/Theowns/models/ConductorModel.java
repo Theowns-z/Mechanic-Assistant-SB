@@ -1,9 +1,10 @@
 package com.Theowns.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data
@@ -11,10 +12,12 @@ import java.util.ArrayList;
 public class ConductorModel extends PersonaModel {
 
     @OneToMany(mappedBy="conductor")
-    private ArrayList<VehiculoModel> vehiculos;
+    @JsonIgnore
+    private List<VehiculoModel> vehiculos;
 
     @OneToMany(mappedBy="conductor")
-    private ArrayList<ServicioModel> servicios;
+    @JsonIgnore
+    private List<ServicioModel> servicios;
 
 }
 

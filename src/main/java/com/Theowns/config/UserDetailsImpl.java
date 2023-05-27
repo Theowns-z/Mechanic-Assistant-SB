@@ -47,7 +47,7 @@ public class UserDetailsImpl implements UserDetails {
         return true;
     }
 
-    public String getName(){
-        return userModel.getName();
+    public String getRole(){
+        return userModel.getRole().name();
     }
 }

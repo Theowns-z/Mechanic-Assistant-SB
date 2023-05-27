@@ -1,5 +1,6 @@
 package com.Theowns.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -23,5 +24,8 @@ public class PersonaModel {
     private String telefono;
     @Column
     private String direccion;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id")
+    private UserModel user;
 
 }
