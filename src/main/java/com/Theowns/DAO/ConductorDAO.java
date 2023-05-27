@@ -17,5 +17,4 @@ public class ConductorDAO {
     private String telefono;
     private String direccion;
 
-
 }
