@@ -14,8 +14,5 @@ public class Main {
         SpringApplication.run(Main.class, args);
     }
 
-    @GetMapping("/")
-    public String greet(){
-        return "<H1>Mechanical Assistant</H1>";
-    }
+
 }
