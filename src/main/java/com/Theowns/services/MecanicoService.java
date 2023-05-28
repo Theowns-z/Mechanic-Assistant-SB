@@ -24,7 +24,8 @@ public class MecanicoService {
         List<MecanicoModel> mecanicos = mecanicoRepository.findAll();
         List<MecanicoDAO> mecanicoResponse = new ArrayList<>();
         for (MecanicoModel mecanico : mecanicos) {
-            MecanicoDAO mecanicoDAO = new MecanicoDAO(mecanico.getId(),mecanico.getNombre(),mecanico.getApellido(),mecanico.getDireccion(), mecanico.getTelefono());
+            MecanicoDAO mecanicoDAO = new MecanicoDAO(mecanico.getId(),mecanico.getNombre(),mecanico.getApellido(),  mecanico.getDireccion(), mecanico.getTelefono());
+
             mecanicoResponse.add(mecanicoDAO);
         }
         return mecanicoResponse;

@@ -13,7 +13,6 @@ public class MecanicoDAO {
     private long id;
     private String nombre;
     private String apellido;
-
     private String telefono;
     private String direccion;
 
