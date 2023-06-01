@@ -1,6 +1,6 @@
 package com.Theowns.services;
 
-import com.Theowns.DAO.ConductorDAO;
+import com.Theowns.DAO.PersonaDTO;
 import com.Theowns.models.ConductorModel;
 import com.Theowns.repositories.ConductorRepository;
 import com.Theowns.services.exceptions.DuplicateException;
@@ -18,35 +18,41 @@ public class ConductorService {
     @Autowired
     UserService userService;
 
-    public List<ConductorDAO> getAll() {
+    public List<PersonaDTO> getAll() {
 
         List<ConductorModel> conductores = conductorRepository.findAll();
-        List<ConductorDAO> conductorResponse = new ArrayList<>();
+        List<PersonaDTO> conductorResponse = new ArrayList<>();
         for (ConductorModel conductor : conductores) {
-            ConductorDAO conductorDAO = new ConductorDAO(conductor.getId(),conductor.getNombre(),conductor.getApellido(),conductor.getDireccion(), conductor.getTelefono());
+            PersonaDTO conductorDAO = new PersonaDTO(conductor.getId(),conductor.getNombre(),conductor.getApellido(),conductor.getDireccion(), conductor.getTelefono());
             conductorResponse.add(conductorDAO);
         }
         return conductorResponse;
     }
 
-    public ConductorDAO getOne(Long id) throws ExceptionObjectNotFound {
+    public PersonaDTO getOne(Long id) throws ExceptionObjectNotFound {
         ConductorModel conductor = conductorRepository.findById(id)
                 .orElseThrow(()->new ExceptionObjectNotFound("Conductor con id "+ id+ " no encontrado"));
-        return new ConductorDAO(conductor.getId(),conductor.getNombre(),conductor.getApellido(),conductor.getDireccion(), conductor.getTelefono());
+        return new PersonaDTO(conductor.getId(),conductor.getNombre(),conductor.getApellido(),conductor.getDireccion(), conductor.getTelefono());
     }
 
-    public ConductorDAO update(Long id, ConductorModel conductorNuevo) throws ExceptionObjectNotFound {
+    public ConductorModel getOneConductor(Long id) throws ExceptionObjectNotFound {
+        return conductorRepository.findById(id)
+                .orElseThrow(()->new ExceptionObjectNotFound("Conductor con id "+ id+ " no encontrado"));
+    }
+
+
+    public PersonaDTO update(Long id, ConductorModel conductorNuevo) throws ExceptionObjectNotFound {
         ConductorModel conductor = conductorRepository
                 .findById(id)
                 .orElseThrow(()->new ExceptionObjectNotFound("Conductor con id "+ id +" no encontrado"));
 
-        conductor.setApellido(conductorNuevo.getApellido());
         conductor.setDireccion(conductorNuevo.getDireccion());
         conductor.setNombre(conductorNuevo.getNombre());
+        conductor.setApellido(conductorNuevo.getApellido());
         conductor.setTelefono(conductorNuevo.getTelefono());
 
         conductorRepository.save(conductor);
-        return  new ConductorDAO(conductor.getId(),conductor.getNombre(),conductor.getApellido(),conductor.getDireccion(), conductor.getTelefono());
+        return  new PersonaDTO(conductor.getId(),conductor.getNombre(),conductor.getApellido(),conductor.getDireccion(), conductor.getTelefono());
 
     }
 

@@ -1,9 +1,8 @@
 package com.Theowns.controllers;
 
-import com.Theowns.models.ConductorModel;
+import com.Theowns.DAO.ResponseObject;
 import com.Theowns.models.GruaModel;
 import com.Theowns.services.GruaService;
-import com.Theowns.services.exceptions.DuplicateException;
 import com.Theowns.services.exceptions.ExceptionObjectNotFound;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -29,7 +28,7 @@ public class GruaController {
     @GetMapping("/{id}")
     public ResponseEntity<ResponseObject<?>> getOne(@PathVariable("id") Long id) throws ExceptionObjectNotFound {
         try {
-            return ResponseEntity.ok(new ResponseObject<GruaModel>("Grua con ID: " + id + "Encontrada", gruaService.getOne(id)));
+            return ResponseEntity.ok(new ResponseObject<GruaModel>("Grua con ID: " + id + "Encontrada ", gruaService.getOne(id)));
         } catch (ExceptionObjectNotFound e) {
             return ResponseEntity.status(404).body(new ResponseObject<String>("Error! No encontrado ", e.getMessage()));
         }

@@ -1,8 +1,8 @@
 package com.Theowns.controllers;
 
 
-import com.Theowns.DAO.MecanicoDAO;
-import com.Theowns.models.MecanicoModel;
+import com.Theowns.DAO.PersonaDTO;
+import com.Theowns.DAO.ResponseObject;
 import com.Theowns.models.MecanicoModel;
 import com.Theowns.services.MecanicoService;
 import com.Theowns.services.exceptions.DuplicateException;
@@ -22,7 +22,7 @@ public class MecanicoController {
 
 
     @GetMapping
-    public List<MecanicoDAO> getAll(){
+    public List<PersonaDTO> getAll(){
         return (mecanicoService.getAll());
     }
 
@@ -30,7 +30,7 @@ public class MecanicoController {
     @GetMapping("/{id}")
     public ResponseObject<?> getOne(@PathVariable("id") Long id) throws ExceptionObjectNotFound {
         try{
-            return new ResponseObject<MecanicoDAO>("Mecanico con id " + id + " encontrado", mecanicoService.getOne(id));
+            return new ResponseObject<PersonaDTO>("Mecanico con id " + id + " encontrado", mecanicoService.getOne(id));
         }catch (ExceptionObjectNotFound e){
             return new ResponseObject<String>("Error! No encontrado", e.getMessage());
         }
@@ -50,8 +50,8 @@ public class MecanicoController {
     @PutMapping("/{id}")
     public ResponseObject<?> update(@RequestBody MecanicoModel mecanico, @PathVariable("id") Long id) throws ExceptionObjectNotFound {
         try{
-            MecanicoDAO   mecanicoDAO = mecanicoService.update(id,mecanico);
-            return new ResponseObject<MecanicoDAO>("Mecanico actualizado correctamente", mecanicoDAO);
+            PersonaDTO  mecanicoDAO = mecanicoService.update(id,mecanico);
+            return new ResponseObject<PersonaDTO>("Mecanico actualizado correctamente", mecanicoDAO);
         }catch (ExceptionObjectNotFound e){
             return new ResponseObject<String>( "Error! No actualizado", e.getMessage());
         }

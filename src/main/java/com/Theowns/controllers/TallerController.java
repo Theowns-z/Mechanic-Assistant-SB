@@ -1,8 +1,7 @@
 package com.Theowns.controllers;
 
+import com.Theowns.DAO.ResponseObject;
 import com.Theowns.models.TallerModel;
-import com.Theowns.models.TallerModel;
-import com.Theowns.services.TallerService;
 import com.Theowns.services.TallerService;
 import com.Theowns.services.exceptions.ExceptionObjectNotFound;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +36,7 @@ public class TallerController {
     @PostMapping()
     public ResponseEntity<ResponseObject<?>> save(@RequestBody TallerModel taller) throws ExceptionObjectNotFound {
         try {
-            return ResponseEntity.ok(new ResponseObject<TallerModel>("Taller fue guarardada correctamente ", tallerService.save(taller)));
+            return ResponseEntity.ok(new ResponseObject<TallerModel>("Taller fue guardada correctamente ", tallerService.save(taller)));
         } catch (ExceptionObjectNotFound e) {
             return ResponseEntity.status(404).body(new ResponseObject<String>("Error! No encontrado ", e.getMessage()));
         }

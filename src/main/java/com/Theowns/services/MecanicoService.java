@@ -1,6 +1,6 @@
 package com.Theowns.services;
 
-import com.Theowns.DAO.MecanicoDAO;
+import com.Theowns.DAO.PersonaDTO;
 import com.Theowns.models.MecanicoModel;
 import com.Theowns.repositories.MecanicoRepository;
 import com.Theowns.services.exceptions.DuplicateException;
@@ -19,25 +19,25 @@ public class MecanicoService {
     @Autowired
     UserService userService;
 
-    public List<MecanicoDAO> getAll() {
+    public List<PersonaDTO> getAll() {
 
         List<MecanicoModel> mecanicos = mecanicoRepository.findAll();
-        List<MecanicoDAO> mecanicoResponse = new ArrayList<>();
+        List<PersonaDTO> mecanicoResponse = new ArrayList<>();
         for (MecanicoModel mecanico : mecanicos) {
-            MecanicoDAO mecanicoDAO = new MecanicoDAO(mecanico.getId(),mecanico.getNombre(),mecanico.getApellido(),  mecanico.getDireccion(), mecanico.getTelefono());
+            PersonaDTO mecanicoDAO = new PersonaDTO(mecanico.getId(),mecanico.getNombre(),mecanico.getApellido(),  mecanico.getDireccion(), mecanico.getTelefono());
 
             mecanicoResponse.add(mecanicoDAO);
         }
         return mecanicoResponse;
     }
 
-    public MecanicoDAO getOne(Long id) throws ExceptionObjectNotFound {
+    public PersonaDTO getOne(Long id) throws ExceptionObjectNotFound {
         MecanicoModel mecanico = mecanicoRepository.findById(id)
                 .orElseThrow(()->new ExceptionObjectNotFound("Mecanico con id "+ id+ " no encontrado"));
-        return new MecanicoDAO(mecanico.getId(),mecanico.getNombre(),mecanico.getApellido(),mecanico.getDireccion(), mecanico.getTelefono());
+        return new PersonaDTO(mecanico.getId(),mecanico.getNombre(),mecanico.getApellido(),mecanico.getDireccion(), mecanico.getTelefono());
     }
 
-    public MecanicoDAO update(Long id, MecanicoModel mecanicoNuevo) throws ExceptionObjectNotFound {
+    public PersonaDTO update(Long id, MecanicoModel mecanicoNuevo) throws ExceptionObjectNotFound {
         MecanicoModel mecanico = mecanicoRepository
                 .findById(id)
                 .orElseThrow(()->new ExceptionObjectNotFound("Mecanico con id "+ id +" no encontrado"));
@@ -48,7 +48,7 @@ public class MecanicoService {
         mecanico.setTelefono(mecanicoNuevo.getTelefono());
 
         mecanicoRepository.save(mecanico);
-        return  new MecanicoDAO(mecanico.getId(),mecanico.getNombre(),mecanico.getApellido(),mecanico.getDireccion(), mecanico.getTelefono());
+        return  new PersonaDTO(mecanico.getId(),mecanico.getNombre(),mecanico.getApellido(),mecanico.getDireccion(), mecanico.getTelefono());
 
     }
 
