@@ -1,4 +1,4 @@
-package com.Theowns.controllers;
+package com.Theowns.DAO;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -21,6 +21,13 @@ public class ServicioModel {
     @JoinColumn(name = "mecanico_id", nullable = false)
     private MecanicoModel mecanico;
 
+    @ManyToOne
+    @JoinColumn(name = "vehiculo_id", nullable = false)
+    private VehiculoModel vehiculo;
+
+    @Column
+    private String descripcion;
+
     @Column
     private String fecha;
 

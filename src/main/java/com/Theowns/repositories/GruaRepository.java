@@ -6,4 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface GruaRepository extends JpaRepository<GruaModel,Long> {
+
+
+
 }

@@ -1,6 +1,7 @@
 package com.Theowns.controllers;
 
 import com.Theowns.DAO.AuthenticationRequest;
+import com.Theowns.DAO.ResponseObject;
 import com.Theowns.config.TokenUtils;
 import com.Theowns.models.ConductorModel;
 import com.Theowns.models.UserModel;
@@ -29,7 +30,7 @@ public class UserController {
     private UserRepository userRepository;
 
     @PostMapping("/login")
-public ResponseEntity<ResponseObject<?>> authenticate( @RequestBody AuthenticationRequest request) throws ExceptionObjectNotFound {
+public ResponseEntity<ResponseObject<?>> authenticate(@RequestBody AuthenticationRequest request) throws ExceptionObjectNotFound {
         authenticationManager
             .authenticate( new UsernamePasswordAuthenticationToken(request.getEmail(),request.getPassword()));
 

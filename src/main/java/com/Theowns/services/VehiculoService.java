@@ -1,5 +1,6 @@
 package com.Theowns.services;
 
+import com.Theowns.models.ConductorModel;
 import com.Theowns.models.VehiculoModel;
 import com.Theowns.repositories.VehiculoRepository;
 import com.Theowns.services.exceptions.ExceptionObjectNotFound;
@@ -12,6 +13,8 @@ import java.util.List;
 public class VehiculoService {
     @Autowired
     VehiculoRepository vehiculoRepository;
+    @Autowired
+    ConductorService conductorService;
 
     public List<VehiculoModel> getAll() {
         return (List<VehiculoModel>) vehiculoRepository.findAll();
@@ -21,7 +24,15 @@ public class VehiculoService {
         return vehiculoRepository.findById(id).orElseThrow(()->new ExceptionObjectNotFound("Vehiculo no encontrado"));
     }
 
-    public VehiculoModel save(VehiculoModel vehiculo) {
+    public List<VehiculoModel> getbyConductor(Long conductorId) {
+        return vehiculoRepository.findAllByConductor_Id(conductorId);
+    }
+
+
+    public VehiculoModel save(VehiculoModel vehiculo, Long conductorId) {
+
+        ConductorModel conductor = conductorService.getOneConductor(conductorId);
+        vehiculo.setConductor(conductor);
         return vehiculoRepository.save(vehiculo);
     }
 
@@ -32,7 +43,6 @@ public class VehiculoService {
 
         vehiculo.setPlaca(vehiculoNuevo.getPlaca());
         vehiculo.setModelo(vehiculoNuevo.getModelo());
-        vehiculo.setFalla(vehiculoNuevo.getFalla()  );
         return vehiculoRepository.save(vehiculo);
 
     }

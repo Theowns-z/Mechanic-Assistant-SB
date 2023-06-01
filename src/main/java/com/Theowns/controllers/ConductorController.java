@@ -1,6 +1,7 @@
 package com.Theowns.controllers;
 
-import com.Theowns.DAO.ConductorDAO;
+import com.Theowns.DAO.PersonaDTO;
+import com.Theowns.DAO.ResponseObject;
 import com.Theowns.models.ConductorModel;
 import com.Theowns.services.ConductorService;
 import com.Theowns.services.exceptions.DuplicateException;
@@ -19,7 +20,7 @@ public class ConductorController {
 
 
     @GetMapping
-    public List<ConductorDAO> getAll(){
+    public List<PersonaDTO> getAll(){
         return (conductorService.getAll());
     }
 
@@ -27,7 +28,7 @@ public class ConductorController {
     @GetMapping("/{id}")
     public ResponseEntity<ResponseObject<?>> getOne(@PathVariable("id") Long id) throws ExceptionObjectNotFound{
         try{
-            return ResponseEntity.ok(new ResponseObject<ConductorDAO>("Conductor con id " + id + " encontrado", conductorService.getOne(id)));
+            return ResponseEntity.ok( new ResponseObject<PersonaDTO>("Conductor con id " + id + " encontrado", conductorService.getOne(id)));
         }catch (ExceptionObjectNotFound e){
             return ResponseEntity.status(404).body(new ResponseObject<String>("Error! No encontrado", e.getMessage()));
         }
@@ -47,7 +48,9 @@ public class ConductorController {
     @PutMapping("/{id}")
     public ResponseEntity<ResponseObject<?>> update(@RequestBody ConductorModel conductor, @PathVariable("id") Long id) throws ExceptionObjectNotFound {
         try{
-            return ResponseEntity.ok(new ResponseObject<ConductorDAO>("Conductor actualizado correctamente", conductorService.update(id,conductor)));
+
+            PersonaDTO   conductorDAO = conductorService.update(id,conductor);
+            return ResponseEntity.ok(new ResponseObject<PersonaDTO>("Conductor actualizado correctamente", conductorDAO));
         }catch (ExceptionObjectNotFound e){
             return ResponseEntity.status(404).body(new ResponseObject<String>( "Error! No actualizado", e.getMessage()));
         }
