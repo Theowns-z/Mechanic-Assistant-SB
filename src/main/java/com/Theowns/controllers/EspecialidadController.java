@@ -2,9 +2,7 @@ package com.Theowns.controllers;
 
 import com.Theowns.DTO.EspecialidadDTO;
 import com.Theowns.DTO.ResponseObject;
-import com.Theowns.models.CalificacionModel;
 import com.Theowns.models.EspecialidadModel;
-import com.Theowns.models.MecanicoModel;
 import com.Theowns.services.EspecialidadService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

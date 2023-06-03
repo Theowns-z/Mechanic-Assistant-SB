@@ -1,13 +1,9 @@
 package com.Theowns.services;
 
 import com.Theowns.DTO.CalificacionDTO;
-import com.Theowns.DTO.MecanicoDTO;
-import com.Theowns.DTO.PersonaDTO;
 import com.Theowns.models.CalificacionModel;
-import com.Theowns.models.ConductorModel;
 import com.Theowns.models.MecanicoModel;
 import com.Theowns.repositories.CalificacionRepository;
-import com.Theowns.services.exceptions.DuplicateException;
 import com.Theowns.services.exceptions.ExceptionObjectNotFound;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

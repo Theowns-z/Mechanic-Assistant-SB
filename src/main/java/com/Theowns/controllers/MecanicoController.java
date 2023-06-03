@@ -39,7 +39,7 @@ public class MecanicoController {
     }
 
 
-    @PostMapping()
+    @PostMapping("/register")
     public ResponseObject<?> save(@RequestBody MecanicoModel mecanico) throws DuplicateException {
         try {
             return new ResponseObject<MecanicoModel>( "Mecanico guardado correctamente",mecanicoService.save(mecanico));

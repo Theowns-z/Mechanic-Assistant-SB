@@ -1,5 +1,6 @@
 package com.Theowns.services;
 
+import com.Theowns.DTO.AuthenticationRequest;
 import com.Theowns.models.UserModel;
 import com.Theowns.repositories.UserRepository;
 import com.Theowns.services.exceptions.DuplicateException;
@@ -17,6 +18,7 @@ public class UserService  {
     @Autowired
     PasswordEncoder passwordEncoder;
 
+
     public List<UserModel> getAll() {
         return (List<UserModel>) userRepository.findAll();
     }
@@ -24,6 +26,7 @@ public class UserService  {
     public UserModel getOne(Long id) throws ExceptionObjectNotFound {
         return userRepository.findById(id).orElseThrow(()->new ExceptionObjectNotFound("User no encontrado"));
     }
+
 
     public UserModel save(UserModel user) throws DuplicateException {
         if (userRepository.existsByEmail(user.getEmail())) {
@@ -36,25 +39,14 @@ public class UserService  {
         return userRepository.save(user);
     }
 
-    public UserModel update(Long id,UserModel userNuevo) throws ExceptionObjectNotFound {
+    public UserModel update(AuthenticationRequest userNuevo) throws ExceptionObjectNotFound {
         UserModel user = userRepository
-                .findById(id)
+                .findByEmail(userNuevo.getEmail())
                 .orElseThrow(()->new ExceptionObjectNotFound("User no encontrado"));
 
-        user.setEmail(userNuevo.getEmail());
-        user.setPassword(userNuevo.getPassword());
+        String encryptedPassword = passwordEncoder.encode(userNuevo.getPassword());
+        user.setPassword(encryptedPassword);
         return userRepository.save(user);
-
     }
 
-
-    public String delete(Long id) throws ExceptionObjectNotFound {
-        UserModel user = userRepository
-                .findById(id)
-                .orElseThrow(()->new ExceptionObjectNotFound("User no encontrado"));
-
-        userRepository.delete(user);
-        return "User con ID " + id + " eliminado satisfactoriamente";
-
-    }
 }

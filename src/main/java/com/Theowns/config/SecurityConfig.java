@@ -35,10 +35,11 @@ public class SecurityConfig {
        return http
             .csrf().disable()
             .authorizeRequests()
-            .requestMatchers("/**")
-            .permitAll()
-            //.requestMatchers("/api/auth/**")
+            // Descomentar para ver swagger
+            //.requestMatchers("/**","/swagger-ui/index.html")
             //.permitAll()
+            .requestMatchers("/api/auth/login","/api/conductor/register","/api/mecanico/register")
+            .permitAll()
             .anyRequest()
             .authenticated()
             .and()

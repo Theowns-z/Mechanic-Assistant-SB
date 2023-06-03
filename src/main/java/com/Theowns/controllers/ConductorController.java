@@ -36,7 +36,7 @@ public class ConductorController {
     }
 
 
-    @PostMapping()
+    @PostMapping("/register")
     public ResponseEntity<ResponseObject<?>> save(@RequestBody ConductorModel conductor) throws DuplicateException {
         try {
         return ResponseEntity.ok( new ResponseObject<ConductorModel>( "Conductor guardado correctamente",conductorService.save(conductor)));
