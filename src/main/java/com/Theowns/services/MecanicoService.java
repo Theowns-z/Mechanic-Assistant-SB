@@ -1,6 +1,7 @@
 package com.Theowns.services;
 
-import com.Theowns.DAO.PersonaDTO;
+import com.Theowns.DTO.MecanicoDTO;
+import com.Theowns.DTO.PersonaDTO;
 import com.Theowns.models.MecanicoModel;
 import com.Theowns.repositories.MecanicoRepository;
 import com.Theowns.services.exceptions.DuplicateException;
@@ -19,22 +20,27 @@ public class MecanicoService {
     @Autowired
     UserService userService;
 
-    public List<PersonaDTO> getAll() {
+    public List<MecanicoDTO> getAll() {
 
         List<MecanicoModel> mecanicos = mecanicoRepository.findAll();
-        List<PersonaDTO> mecanicoResponse = new ArrayList<>();
+        List<MecanicoDTO> mecanicoResponse = new ArrayList<>();
         for (MecanicoModel mecanico : mecanicos) {
-            PersonaDTO mecanicoDAO = new PersonaDTO(mecanico.getId(),mecanico.getNombre(),mecanico.getApellido(),  mecanico.getDireccion(), mecanico.getTelefono());
+            MecanicoDTO mecanicoDTO = Utils.crearMecanicoDTO(mecanico);
 
-            mecanicoResponse.add(mecanicoDAO);
+            mecanicoResponse.add(mecanicoDTO);
         }
         return mecanicoResponse;
     }
 
-    public PersonaDTO getOne(Long id) throws ExceptionObjectNotFound {
+    public MecanicoDTO getOne(Long id) throws ExceptionObjectNotFound {
         MecanicoModel mecanico = mecanicoRepository.findById(id)
                 .orElseThrow(()->new ExceptionObjectNotFound("Mecanico con id "+ id+ " no encontrado"));
-        return new PersonaDTO(mecanico.getId(),mecanico.getNombre(),mecanico.getApellido(),mecanico.getDireccion(), mecanico.getTelefono());
+        return Utils.crearMecanicoDTO(mecanico);
+    }
+
+    public MecanicoModel getOneMecanico(Long id) throws ExceptionObjectNotFound {
+        return mecanicoRepository.findById(id)
+                .orElseThrow(()->new ExceptionObjectNotFound("Mecanico con id "+ id+ " no encontrado"));
     }
 
     public PersonaDTO update(Long id, MecanicoModel mecanicoNuevo) throws ExceptionObjectNotFound {
@@ -48,7 +54,7 @@ public class MecanicoService {
         mecanico.setTelefono(mecanicoNuevo.getTelefono());
 
         mecanicoRepository.save(mecanico);
-        return  new PersonaDTO(mecanico.getId(),mecanico.getNombre(),mecanico.getApellido(),mecanico.getDireccion(), mecanico.getTelefono());
+        return  new PersonaDTO(mecanico.getId(),mecanico.getCedula(),mecanico.getNombre(),mecanico.getApellido(),mecanico.getDireccion(), mecanico.getTelefono());
 
     }
 

@@ -1,8 +1,9 @@
 package com.Theowns.controllers;
 
 
-import com.Theowns.DAO.PersonaDTO;
-import com.Theowns.DAO.ResponseObject;
+import com.Theowns.DTO.MecanicoDTO;
+import com.Theowns.DTO.PersonaDTO;
+import com.Theowns.DTO.ResponseObject;
 import com.Theowns.models.MecanicoModel;
 import com.Theowns.services.MecanicoService;
 import com.Theowns.services.exceptions.DuplicateException;
@@ -22,7 +23,7 @@ public class MecanicoController {
 
 
     @GetMapping
-    public List<PersonaDTO> getAll(){
+    public List<MecanicoDTO> getAll(){
         return (mecanicoService.getAll());
     }
 
@@ -30,7 +31,7 @@ public class MecanicoController {
     @GetMapping("/{id}")
     public ResponseObject<?> getOne(@PathVariable("id") Long id) throws ExceptionObjectNotFound {
         try{
-            return new ResponseObject<PersonaDTO>("Mecanico con id " + id + " encontrado", mecanicoService.getOne(id));
+            return new ResponseObject<MecanicoDTO>("Mecanico con id " + id + " encontrado", mecanicoService.getOne(id));
         }catch (ExceptionObjectNotFound e){
             return new ResponseObject<String>("Error! No encontrado", e.getMessage());
         }

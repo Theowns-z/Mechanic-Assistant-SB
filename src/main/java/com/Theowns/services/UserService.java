@@ -1,7 +1,5 @@
 package com.Theowns.services;
 
-import com.Theowns.DAO.ConductorDAO;
-import com.Theowns.models.ConductorModel;
 import com.Theowns.models.UserModel;
 import com.Theowns.repositories.UserRepository;
 import com.Theowns.services.exceptions.DuplicateException;

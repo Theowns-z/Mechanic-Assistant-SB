@@ -19,6 +19,7 @@ public class MecanicoModel extends PersonaModel {
     private List<EspecialidadModel> especialidades;
 
     @OneToMany(mappedBy="mecanico")
+    @JsonIgnore
     private List<ServicioModel> servicio;
 
     @OneToMany(mappedBy="mecanico")

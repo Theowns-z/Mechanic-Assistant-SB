@@ -1,7 +1,7 @@
 package com.Theowns.controllers;
 
-import com.Theowns.DAO.PersonaDTO;
-import com.Theowns.DAO.ResponseObject;
+import com.Theowns.DTO.PersonaDTO;
+import com.Theowns.DTO.ResponseObject;
 import com.Theowns.models.ConductorModel;
 import com.Theowns.services.ConductorService;
 import com.Theowns.services.exceptions.DuplicateException;

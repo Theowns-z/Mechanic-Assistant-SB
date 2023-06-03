@@ -1,25 +1,19 @@
 package com.Theowns.controllers;
 
-import com.Theowns.DAO.AuthenticationRequest;
-import com.Theowns.DAO.ResponseObject;
+import com.Theowns.DTO.AuthenticationRequest;
+import com.Theowns.DTO.PersonaDTO;
+import com.Theowns.DTO.ResponseObject;
 import com.Theowns.config.TokenUtils;
-import com.Theowns.models.ConductorModel;
+import com.Theowns.models.MecanicoModel;
 import com.Theowns.models.UserModel;
 import com.Theowns.repositories.UserRepository;
-import com.Theowns.services.UserService;
-import com.Theowns.services.exceptions.DuplicateException;
 import com.Theowns.services.exceptions.ExceptionObjectNotFound;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.util.Optional;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -30,7 +24,7 @@ public class UserController {
     private UserRepository userRepository;
 
     @PostMapping("/login")
-public ResponseEntity<ResponseObject<?>> authenticate(@RequestBody AuthenticationRequest request) throws ExceptionObjectNotFound {
+    public ResponseEntity<ResponseObject<?>> authenticate(@RequestBody AuthenticationRequest request) throws ExceptionObjectNotFound {
         authenticationManager
             .authenticate( new UsernamePasswordAuthenticationToken(request.getEmail(),request.getPassword()));
 
@@ -45,4 +39,5 @@ public ResponseEntity<ResponseObject<?>> authenticate(@RequestBody Authenticatio
 
         return ResponseEntity.status(400).body(new ResponseObject<String>("Error! No loggeado","Ha ocurrido un error, comprueba tus credenciales"));
     }
+
 }

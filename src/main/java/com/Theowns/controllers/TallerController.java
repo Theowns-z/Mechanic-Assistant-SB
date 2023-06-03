@@ -1,6 +1,6 @@
 package com.Theowns.controllers;
 
-import com.Theowns.DAO.ResponseObject;
+import com.Theowns.DTO.ResponseObject;
 import com.Theowns.models.TallerModel;
 import com.Theowns.services.TallerService;
 import com.Theowns.services.exceptions.ExceptionObjectNotFound;

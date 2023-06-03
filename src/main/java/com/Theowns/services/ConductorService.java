@@ -1,6 +1,6 @@
 package com.Theowns.services;
 
-import com.Theowns.DAO.PersonaDTO;
+import com.Theowns.DTO.PersonaDTO;
 import com.Theowns.models.ConductorModel;
 import com.Theowns.repositories.ConductorRepository;
 import com.Theowns.services.exceptions.DuplicateException;
@@ -23,7 +23,7 @@ public class ConductorService {
         List<ConductorModel> conductores = conductorRepository.findAll();
         List<PersonaDTO> conductorResponse = new ArrayList<>();
         for (ConductorModel conductor : conductores) {
-            PersonaDTO conductorDAO = new PersonaDTO(conductor.getId(),conductor.getNombre(),conductor.getApellido(),conductor.getDireccion(), conductor.getTelefono());
+            PersonaDTO conductorDAO = new PersonaDTO(conductor.getId(),conductor.getCedula(),conductor.getNombre(),conductor.getApellido(),conductor.getDireccion(), conductor.getTelefono());
             conductorResponse.add(conductorDAO);
         }
         return conductorResponse;
@@ -32,7 +32,7 @@ public class ConductorService {
     public PersonaDTO getOne(Long id) throws ExceptionObjectNotFound {
         ConductorModel conductor = conductorRepository.findById(id)
                 .orElseThrow(()->new ExceptionObjectNotFound("Conductor con id "+ id+ " no encontrado"));
-        return new PersonaDTO(conductor.getId(),conductor.getNombre(),conductor.getApellido(),conductor.getDireccion(), conductor.getTelefono());
+        return new PersonaDTO(conductor.getId(),conductor.getCedula(),conductor.getNombre(),conductor.getApellido(),conductor.getDireccion(), conductor.getTelefono());
     }
 
     public ConductorModel getOneConductor(Long id) throws ExceptionObjectNotFound {
@@ -40,6 +40,13 @@ public class ConductorService {
                 .orElseThrow(()->new ExceptionObjectNotFound("Conductor con id "+ id+ " no encontrado"));
     }
 
+    public ConductorModel save(ConductorModel conductor) throws DuplicateException {
+        if (conductorRepository.existsByCedula(conductor.getCedula())) {
+            throw new DuplicateException("La cedula "+ conductor.getCedula()+" ya está registrada");
+        }
+        userService.save(conductor.getUser());
+        return conductorRepository.save(conductor);
+    }
 
     public PersonaDTO update(Long id, ConductorModel conductorNuevo) throws ExceptionObjectNotFound {
         ConductorModel conductor = conductorRepository
@@ -52,17 +59,8 @@ public class ConductorService {
         conductor.setTelefono(conductorNuevo.getTelefono());
 
         conductorRepository.save(conductor);
-        return  new PersonaDTO(conductor.getId(),conductor.getNombre(),conductor.getApellido(),conductor.getDireccion(), conductor.getTelefono());
+        return  new PersonaDTO(conductor.getId(),conductor.getCedula(),conductor.getNombre(),conductor.getApellido(),conductor.getDireccion(), conductor.getTelefono());
 
-    }
-
-
-    public ConductorModel save(ConductorModel conductor) throws DuplicateException {
-        if (conductorRepository.existsByCedula(conductor.getCedula())) {
-            throw new DuplicateException("La cedula "+ conductor.getCedula()+" ya está registrada");
-        }
-        userService.save(conductor.getUser());
-        return conductorRepository.save(conductor);
     }
 
     public String delete(Long id) throws ExceptionObjectNotFound {

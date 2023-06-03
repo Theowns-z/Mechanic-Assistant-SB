@@ -1,6 +1,6 @@
 package com.Theowns.controllers;
 
-import com.Theowns.DAO.ResponseObject;
+import com.Theowns.DTO.ResponseObject;
 import com.Theowns.models.VehiculoModel;
 import com.Theowns.services.VehiculoService;
 import com.Theowns.services.exceptions.ExceptionObjectNotFound;

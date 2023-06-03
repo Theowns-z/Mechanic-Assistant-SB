@@ -1,4 +1,4 @@
-package com.Theowns.DAO;
+package com.Theowns.DTO;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
