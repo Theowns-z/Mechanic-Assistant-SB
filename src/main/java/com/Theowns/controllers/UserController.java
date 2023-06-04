@@ -1,6 +1,7 @@
 package com.Theowns.controllers;
 
 import com.Theowns.DTO.AuthenticationRequest;
+import com.Theowns.DTO.LoginResponse;
 import com.Theowns.DTO.PersonaDTO;
 import com.Theowns.DTO.ResponseObject;
 import com.Theowns.config.TokenUtils;
@@ -37,9 +38,16 @@ public class UserController {
             .orElseThrow(()->new ExceptionObjectNotFound("Usuario no encontrado"));
 
         if(user != null){
-            return ResponseEntity.ok(new ResponseObject<String>(
-                    "Se ha loggeado correctamente",
-                    TokenUtils.createToken(user.getRole().name(),user.getEmail())));
+            long id = user.getPersona().getId();
+            String role = user.getRole().name();
+
+            return ResponseEntity.ok(new ResponseObject<LoginResponse>(
+        "Se ha loggeado correctamente",
+                 new LoginResponse(
+                         id,
+                         request.getEmail(),
+                         TokenUtils.createToken(user.getRole().name(),user.getEmail()),
+                         role)));
         }
 
         return ResponseEntity.status(400).body(new ResponseObject<String>("Error! No loggeado","Ha ocurrido un error, comprueba tus credenciales"));
