@@ -14,6 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/conductor")
+@CrossOrigin(origins = "*")
 public class ConductorController {
     @Autowired
     ConductorService conductorService;

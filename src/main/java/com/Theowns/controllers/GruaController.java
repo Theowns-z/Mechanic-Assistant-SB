@@ -12,6 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/grua")
+@CrossOrigin(origins = "*")
 public class GruaController {
 
 

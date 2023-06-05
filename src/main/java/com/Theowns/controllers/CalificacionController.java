@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/calificacion")
+@CrossOrigin(origins = "*")
 public class CalificacionController {
     @Autowired
     CalificacionService calificacionService;

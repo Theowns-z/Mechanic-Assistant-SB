@@ -16,6 +16,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api/mecanico")
+@CrossOrigin(origins = "*")
 public class MecanicoController {
 
     @Autowired
