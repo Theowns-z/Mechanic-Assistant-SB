@@ -9,12 +9,12 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.Theowns</groupId>
-	<artifactId>Mechanical-Asisstant</artifactId>
+	<artifactId>Mechanical-Assistant</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Mechanical-Asisstant</name>
+	<name>Mechanical-Assistant</name>
 	<description>Backend of mechanical assistant</description>
 	<properties>
-		<java.version>17</java.version>
+		<java.version>20</java.version>
 	</properties>
 	<dependencies>
 		<dependency>
